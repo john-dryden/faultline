@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAULTLINE — earthbending duels</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233b2f25'/><path d='M4 26 L13 8 L17 17 L21 11 L28 26 Z' fill='%23e3c46d'/></svg>" />
+    <style>:root{--ink:#2b221b;--paper:#f3e6c8;--paper2:#e6d3a6;--stone:#6d6358;--p0:#4fc07a;--p1:#f0883a;--s1:#e8633a;--s2:#6fbf4a;--s3:#4aa3d8;--s4:#d6a23a}*{box-sizing:border-box}html,body{height:100%;color:var(--ink);-webkit-user-select:none;user-select:none;background:#9fc6dc;margin:0;font-family:Trebuchet MS,Segoe UI,system-ui,sans-serif;overflow:hidden}canvas#game{width:100%;height:100%;display:block;position:fixed;inset:0}.hidden{display:none!important}.sg{color:#fff;text-shadow:0 1px #0000004d;border-radius:8px;justify-content:center;align-items:center;width:34px;height:34px;font-size:19px;font-weight:900;display:inline-flex;position:relative;box-shadow:0 2px #00000059,inset 0 -3px #0000002e}.sg small{opacity:.85;font-size:10px;position:absolute;bottom:0;right:3px}.sg.s1{background:var(--s1)}.sg.s2{background:var(--s2)}.sg.s3{background:var(--s3)}.sg.s4{background:var(--s4)}.sg.empty{background:#2b221b59;box-shadow:inset 0 2px #00000040}.sg.mini{border-radius:5px;width:22px;height:22px;font-size:13px}.sg.mini small{display:none}.sg.mid{border-radius:6px;width:26px;height:26px;font-size:14px}.sg.mid small{font-size:9px;bottom:-1px;right:2px}.sg small{white-space:nowrap;opacity:1;background:#0000006b;border-radius:4px;padding:0 3px;line-height:1.25;bottom:1px;right:1px}.breath{gap:4px;margin-top:5px;display:flex}.breath i{background:#1d1713;border-radius:4px;flex:1;height:7px;display:block;overflow:hidden}.breath i u{background:#7fb6c9;width:0;height:100%;display:block}.breath i.on u{background:#bfeaff;box-shadow:0 0 6px #bfeaff}#hp1 .breath{flex-direction:row-reverse}#hp1 .breath i u{margin-left:auto}.breath.head{background:#1d171399;border-radius:5px;gap:2px;margin:0;padding:2px}.breath.head i{background:#ffffff24;border-radius:2px;flex:none;width:9px;height:5px}#hud{pointer-events:none;position:fixed;inset:0}#top{grid-template-columns:1fr 120px 1fr;align-items:start;gap:12px;width:min(900px,94vw);display:grid;position:absolute;top:12px;left:50%;transform:translate(-50%)}.hpwrap{background:#2b221bc7;border-radius:10px;padding:6px 8px 7px;box-shadow:0 3px #0000004d}.hpname{color:var(--paper);letter-spacing:.08em;justify-content:space-between;margin-bottom:4px;font-size:13px;font-weight:800;display:flex}.hpname .pips span{background:#ffffff2e;border:2px solid #ffffff59;border-radius:50%;width:11px;height:11px;margin-left:4px;display:inline-block}.hpname .pips span.on{background:#ffd75a;border-color:#fff3bf;box-shadow:0 0 8px #ffd75a}.hpbar{background:#1d1713;border-radius:6px;height:18px;position:relative;overflow:hidden}.hpfill,.hplag,.hparmor{border-radius:6px;position:absolute;top:0;bottom:0;left:0}.hplag{background:#f6efe0;transition:width .5s ease-out .25s}.hpfill{transition:width 80ms linear}.hparmor{background:repeating-linear-gradient(45deg,#9a9088,#9a9088 5px,#7b726a 5px 10px);border-radius:0 0 6px 6px;height:6px;top:auto;bottom:0}#hp0 .hpfill{background:linear-gradient(#6fdc97, var(--p0))}#hp1 .hpfill{background:linear-gradient(#ffad66, var(--p1))}#hp1 .hpbar>div{left:auto;right:0}#hp1 .hpname{flex-direction:row-reverse}#hp1 .pips span{margin:0 4px 0 0}#clock{text-align:center;color:var(--paper);background:#2b221bc7;border-radius:10px;padding:5px 0 6px;box-shadow:0 3px #0000004d}#clock b{font-variant-numeric:tabular-nums;font-size:24px;line-height:1;display:block}#clock span{letter-spacing:.14em;opacity:.8;font-size:10px}#clock.sudden b{color:#ff6a4a}#cast{flex-direction:column;align-items:center;gap:7px;display:flex;position:absolute;bottom:22px;left:50%;transform:translate(-50%)}#castname{letter-spacing:.06em;min-height:26px;color:var(--paper);opacity:0;white-space:nowrap;background:#2b221bcc;border-radius:14px;padding:3px 14px;font-size:16px;font-weight:900;transition:opacity .1s}#castname.on{opacity:1}#castname.bad{color:#ffb4a0}#castname em{opacity:.75;margin-left:8px;font-size:13px;font-style:normal;font-weight:600}#slots{background:#2b221bb8;border-radius:13px;gap:7px;padding:8px;display:flex;box-shadow:0 3px #0000004d}#slots .sg{border-radius:10px;width:46px;height:46px;font-size:26px}#slots .sg.pop{animation:.16s ease-out pop}#slots.recover{outline:3px solid #ffffff38}@keyframes pop{0%{transform:scale(1.45)}to{transform:scale(1)}}#ground{letter-spacing:.1em;color:#ffd0c0;background:#781e14cc;border-radius:9px;padding:2px 10px;font-size:12px;font-weight:800}#legend{gap:5px;display:grid;position:absolute;bottom:16px;left:14px}#legend div{color:var(--paper);letter-spacing:.08em;text-shadow:0 1px 2px #000000b3;align-items:center;gap:7px;font-size:12px;font-weight:800;display:flex}#legend .sg{width:28px;height:28px;font-size:16px}#legend .hint{opacity:.85;letter-spacing:.02em;margin-top:4px;font-weight:600}#legend kbd,.panel kbd{background:var(--paper);color:var(--ink);font:inherit;border-radius:4px;padding:0 5px;font-weight:900;box-shadow:0 2px #0006}#net{color:var(--paper);opacity:.8;text-shadow:0 1px 2px #000;text-align:right;white-space:pre-line;font-size:11px;position:absolute;bottom:10px;right:12px}#toast{color:#ffe9d8;opacity:0;white-space:nowrap;background:#782818e0;border-radius:14px;padding:5px 16px;font-size:14px;font-weight:800;transition:opacity .25s;position:absolute;bottom:150px;left:50%;transform:translate(-50%)}#toast.on{opacity:1}#banner{text-align:center;pointer-events:none;position:absolute;top:27%;left:0;right:0}#banner h1{letter-spacing:.04em;color:var(--paper);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink), 0 10px 24px #0006;margin:0;font-size:clamp(44px,9vw,120px);font-weight:900;animation:.35s cubic-bezier(.2,1.6,.4,1) slam}#banner p{color:var(--paper);text-shadow:0 2px 0 var(--ink), 0 0 12px #0009;margin:6px 0 0;font-size:20px;font-weight:800}@keyframes slam{0%{opacity:0;transform:scale(2.2)}to{opacity:1;transform:scale(1)}}#lobby{text-align:center;color:var(--paper);pointer-events:auto;background:#2b221bd9;border-radius:14px;padding:12px 22px 14px;position:absolute;top:84px;left:50%;transform:translate(-50%);box-shadow:0 4px #00000059}#lobby .code{letter-spacing:.22em;color:#ffd75a;-webkit-user-select:text;user-select:text;margin:2px 0 2px .22em;font-size:46px;font-weight:900}#lobby small{opacity:.85;font-size:13px;display:block}#lobby button{margin-top:8px}#lesson{width:min(370px,42vw);max-height:calc(100vh - 290px);color:var(--paper);pointer-events:auto;background:#2b221be0;border-radius:12px;padding:10px 14px 12px;font-size:14px;line-height:1.42;position:absolute;top:84px;left:14px;overflow-y:auto;box-shadow:0 4px #00000059}#lesson b.t{letter-spacing:.16em;opacity:.7;margin:2px 0 4px;font-size:11px;display:block}#lesson h5{letter-spacing:.03em;align-items:center;gap:8px;margin:6px 0 4px;font-size:19px;display:flex}#lesson p{margin:4px 0 8px}#lesson p.intro{opacity:.82;border-left:3px solid #ffffff40;padding-left:8px;font-size:13px}#lesson p.hintp{color:#ffe08a;font-size:13px}#lesson .tiles{vertical-align:middle;gap:2px;margin:0 2px;display:inline-flex}#lesson .goal{background:#ffffff1a;border-radius:8px;margin:2px 0 8px;padding:6px 9px;font-weight:800}#lesson .goal.ok{background:#4c8a3a}#lesson .goal em{float:right;color:#ffd75a;font-style:normal}#lesson .nav{gap:6px;display:flex}#lesson .nav button{flex:1;padding:5px 4px;font-size:12px}#lesson .dots{flex-wrap:wrap;gap:4px;margin-bottom:2px;display:flex}#lesson .dot{width:24px;height:22px;box-shadow:none;color:var(--paper);background:#ffffff24;border-radius:6px;padding:0;font-size:11px}#lesson .dot.ok{background:#4c8a3a}#lesson .dot.cur{outline:2px solid #ffd75a}#lesson.done{outline:3px solid #ffd75a}.float{pointer-events:none;flex-direction:column;align-items:center;gap:3px;display:flex;position:absolute;transform:translate(-50%,-100%)}.float .fs{gap:3px;display:flex}.dmg{color:#fff;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;pointer-events:none;font-size:22px;font-weight:900;animation:.8s ease-out forwards rise;position:absolute;transform:translate(-50%,-50%)}.dmg.big{color:#ffd75a;font-size:32px}.dmg.arm{color:#c9c2ba}@keyframes rise{to{opacity:0;transform:translate(-50%,-190%)}}button{font:inherit;letter-spacing:.05em;color:var(--ink);cursor:pointer;pointer-events:auto;background:linear-gradient(#f7e9c4,#e2c98f);border:0;border-radius:10px;padding:11px 20px;font-size:16px;font-weight:900;transition:transform 60ms;box-shadow:0 4px #8d7443,0 6px 14px #00000040}button:hover{filter:brightness(1.06);transform:translateY(-1px)}button:active{transform:translateY(3px);box-shadow:0 1px #8d7443}button.alt{color:var(--paper);background:linear-gradient(#8a7d6e,#6d6358);box-shadow:0 4px #3b332c}button.sel{color:var(--ink);background:linear-gradient(#ffe48a,#f0bf4a);outline:3px solid #fff}button.small{border-radius:8px;padding:6px 12px;font-size:13px}#menu{background:radial-gradient(at 50% 35%,#3c2c1e40,#1e1610c7);justify-content:center;align-items:safe center;padding:10px 0;display:flex;position:fixed;inset:0;overflow:auto}.panel{background:var(--paper);border:3px solid var(--ink);pointer-events:auto;border-radius:18px;width:min(560px,94vw);padding:24px 30px 26px;box-shadow:0 8px #8d7443,0 22px 60px #00000080}.panel h1{letter-spacing:.1em;text-align:center;margin:0;font-size:58px;font-weight:900;line-height:1}.panel h1 i{color:#b4552b;font-style:normal}.panel .tag{text-align:center;opacity:.75;margin:6px 0 18px;font-weight:700}.panel h2{letter-spacing:.16em;opacity:.7;margin:16px 0 8px;font-size:13px}.row{flex-wrap:wrap;align-items:center;gap:8px;display:flex}.row>button{flex:1}#code{font:inherit;letter-spacing:.3em;text-align:center;text-transform:uppercase;border:3px solid var(--ink);width:150px;color:var(--ink);-webkit-user-select:text;user-select:text;background:#fffaf0;border-radius:10px;padding:8px 6px;font-size:22px;font-weight:900}#menuStatus{text-align:center;color:#a0381c;white-space:pre-line;min-height:20px;margin-top:10px;font-size:14px;font-weight:800}.how{font-size:14px;line-height:1.5}.how p{margin:6px 0}#scroll{background:var(--paper);border-left:4px solid var(--ink);pointer-events:auto;width:min(380px,92vw);padding:14px 16px 30px;transition:transform .18s ease-out;position:fixed;top:0;bottom:0;right:0;overflow-y:auto;transform:translate(105%);box-shadow:-10px 0 40px #00000059}#scroll.open{transform:none}#scroll h3{letter-spacing:.1em;margin:0 0 2px;font-size:22px}#scroll h4{letter-spacing:.16em;opacity:.65;border-bottom:2px solid var(--paper2);margin:14px 0 5px;padding-bottom:3px;font-size:12px}#scroll .mv{grid-template-columns:84px 1fr;align-items:center;gap:8px;padding:4px 0;display:grid}#scroll .mv .k{gap:3px;display:flex}#scroll .mv b{font-size:14px}#scroll .mv span{opacity:.78;font-size:12px;line-height:1.25;display:block}#scroll .mv.match{background:#ffe48a;border-radius:8px;box-shadow:0 0 0 4px #ffe48a}#scroll .mv.dim{opacity:.35}#scroll .gram{grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;font-size:12px;font-weight:700;display:grid}#scroll .gram div{align-items:center;gap:6px;display:flex}#scroll .note{background:var(--paper2);border-radius:8px;margin:10px 0 0;padding:7px 9px;font-size:12px;line-height:1.35}.seg{flex:1;gap:0;display:flex}.seg button{border-radius:0;flex:1}.seg button:first-child{border-radius:8px 0 0 8px}.seg button:last-child{border-radius:0 8px 8px 0}.rule{grid-template-columns:64px 1fr;align-items:center;gap:8px;margin-top:6px;display:grid}.rule>b{letter-spacing:.14em;opacity:.7;font-size:11px}.ruleNote{opacity:.85;min-height:17px;margin:7px 0 0;font-size:12.5px;line-height:1.35}#bindRows{grid-template-columns:1fr 120px;align-items:center;gap:6px 10px;margin-top:10px;font-size:14px;font-weight:700;display:grid}#bindRows button{padding:6px 8px;font-size:14px}#bindRows button.listen{background:#fff;outline:3px solid #b4552b}#bindNote{opacity:.85;min-height:34px;margin:8px 0 0;font-size:12.5px;line-height:1.35}#end{pointer-events:auto;gap:12px;display:flex;position:absolute;top:56%;left:50%;transform:translate(-50%)}</style>
+    <script type="module" crossorigin src="./assets/main-D-9rc09H.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/session-De0OZyjr.js">
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+
+    <div id="hud" class="hidden">
+      <div id="top">
+        <div id="hp0" class="hpwrap">
+          <div class="hpname"><span class="nm">YOU</span><span class="pips"></span></div>
+          <div class="hpbar"><div class="hplag"></div><div class="hpfill"></div><div class="hparmor"></div></div>
+          <div class="breath hidden"></div>
+        </div>
+        <div id="clock"><b>—</b><span>ROUND 1</span></div>
+        <div id="hp1" class="hpwrap">
+          <div class="hpname"><span class="nm">RIVAL</span><span class="pips"></span></div>
+          <div class="hpbar"><div class="hplag"></div><div class="hpfill"></div><div class="hparmor"></div></div>
+          <div class="breath hidden"></div>
+        </div>
+      </div>
+      <div id="lesson" class="hidden"></div>
+      <div id="lobby" class="hidden"></div>
+      <div id="banner"></div>
+      <div id="end" class="hidden">
+        <button id="btnRematch">REMATCH</button>
+        <button id="btnLeave" class="alt">LEAVE</button>
+      </div>
+      <div id="floats"></div>
+      <div id="toast"></div>
+      <div id="cast">
+        <div id="ground" class="hidden"></div>
+        <div id="castname"></div>
+        <div id="slots"></div>
+      </div>
+      <div id="legend"></div>
+      <div id="net"></div>
+    </div>
+
+    <div id="scroll"></div>
+
+    <div id="menu">
+      <div class="panel" id="menuMain">
+        <h1>FAULT<i>LINE</i></h1>
+        <div class="tag">Earthbending duels. Four signs. One mesa. Nothing comes from nowhere.</div>
+        <h2>DUEL A FRIEND</h2>
+        <div class="row">
+          <button id="btnHost">HOST A DUEL</button>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <input id="code" maxlength="4" placeholder="CODE" autocomplete="off" spellcheck="false" />
+          <button id="btnJoin">JOIN</button>
+        </div>
+        <h2>LEARN <span style="opacity: .7; letter-spacing: 0; font-weight: 600">(guided lessons: the arena and the dummy set up each situation)</span></h2>
+        <div class="row" id="tutRow"></div>
+        <h2>SPAR ALONE</h2>
+        <div class="row" id="trainRow">
+          <button class="alt" data-bot="-1">FREE DOJO</button>
+          <button class="alt" data-bot="0">NOVICE</button>
+          <button class="alt" data-bot="1">ADEPT</button>
+          <button class="alt" data-bot="2">MASTER</button>
+        </div>
+        <div id="labBlock">
+          <h2>THE LAB <span style="opacity: .7; letter-spacing: 0; font-weight: 600">(pick who sits in each seat: you, the scripted Master, or a fighter bred by machine learning)</span></h2>
+          <div class="rule"><b>LEFT</b>
+            <div class="seg" id="seatLeft"></div>
+          </div>
+          <div class="rule"><b>RIGHT</b>
+            <div class="seg" id="seatRight"></div>
+          </div>
+          <div class="row">
+            <button class="alt" id="btnLabGo">START</button>
+            <button class="alt" id="btnLab">LAB REPORT</button>
+          </div>
+          <p class="ruleNote" id="labNote"></p>
+        </div>
+        <h2>ARENA <span style="opacity: .7; letter-spacing: 0; font-weight: 600">(host &amp; training)</span></h2>
+        <div class="row" id="mapRow"></div>
+        <h2>HOUSE RULES <span style="opacity: .7; letter-spacing: 0; font-weight: 600">(host &amp; training)</span></h2>
+        <div class="rule"><b>PACE</b>
+          <div class="seg" id="paceRow">
+            <button class="small alt" data-breath="0">FLOW</button>
+            <button class="small alt" data-breath="1">BREATH</button>
+          </div>
+        </div>
+        <div class="rule"><b>SCROLL</b>
+          <div class="seg" id="scrollRow">
+            <button class="small alt" data-simple="0">FULL · 24 CASTS</button>
+            <button class="small alt" data-simple="1">SIMPLE · 15 CASTS</button>
+          </div>
+        </div>
+        <p class="ruleNote" id="ruleNote"></p>
+        <div id="menuStatus"></div>
+        <div class="row" style="margin-top: 8px; justify-content: center">
+          <button class="small alt" id="btnHow">HOW TO PLAY</button>
+          <button class="small alt" id="btnKeys">CONTROLS</button>
+          <button class="small alt" id="btnScroll">THE SCROLL</button>
+        </div>
+      </div>
+      <div class="panel hidden" id="menuKeys">
+        <h2 style="margin-top: 0">CONTROLS</h2>
+        <div class="row" id="presetRow"></div>
+        <p id="bindNote"></p>
+        <div id="bindRows"></div>
+        <p class="ruleNote">Move with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or the arrows. Left click always casts, right click always clears. Click a key above, then press the key you want; if it was already in use the two swap.</p>
+        <div class="row" style="margin-top: 10px"><button id="btnKeysBack">BACK</button></div>
+      </div>
+      <div class="panel hidden" id="menuHow">
+        <h2 style="margin-top: 0">HOW TO PLAY</h2>
+        <div class="how">
+          <p><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move &nbsp; <kbd>Space</kbd> jump (clears one level) &nbsp; <b>mouse</b> aims</p>
+          <p><span id="howKeys"></span> String up to three, then <b>left click</b><span id="howCast"></span> to cast at the cursor. <b>Right click</b><span id="howClear"></span> clears. Change the keys under CONTROLS.</p>
+          <p><b>Earth comes from somewhere.</b> A punch needs a rock, a wall, or a body in front of you. Boulders are ripped from the ground and leave craters; spent ground turns to dark bedrock and gives nothing. Walls are ammo. Rubble is ammo.</p>
+          <p><b>Take the high ground.</b> Earth thrown downhill flies with gravity; thrown uphill, against it. A pillar under your own feet is a firing platform, and a sinkhole under theirs takes it away.</p>
+          <p><b>Your feet must touch earth</b> to move the ground. In the air or on steel you can still punch and catch rocks.</p>
+          <p>Your rival sees your signs above your head, and you see theirs. Cracks on the ground mean something is about to erupt there: move.</p>
+          <p>Fall off the mesa and you lose the round. First to three rounds wins. After 60 seconds the rim starts to crumble.</p>
+          <p><b>House rules</b> (the host picks). <b>Breath</b>: every sign costs one breath and breath returns on its own, so both benders get the same number of casts and the duel is about which one and when; formed signs never fade, and you can see how much breath your rival has left. <b>Simple scroll</b>: 15 casts instead of 24.</p>
+          <p><kbd>Tab</kbd> opens the scroll of casts &nbsp; <kbd>V</kbd> shoulder camera &nbsp; <kbd>M</kbd> mute &nbsp; <kbd>Esc</kbd> menu &nbsp; wheel zooms</p>
+        </div>
+        <div class="row" style="margin-top: 14px"><button id="btnHowBack">BACK</button></div>
+      </div>
+    </div>
+
+  </body>
+</html>
